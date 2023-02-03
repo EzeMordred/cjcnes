@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .form-container {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Tabla de Datos</h2>
+
+  <table id="data-table">
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Acciones</th>
+    </tr>
+    <tr>
+      <td>Juan</td>
+      <td>Perez</td>
+      <td>
+        <button onclick="editData(event)">Editar</button>
+        <button onclick="deleteData(event)">Eliminar</button>
+        <form class="form-container">
+          <input type="text" name="nombre" value="Juan">
+          <input type="text" name="apellido" value="Perez">
+          <button type="submit">Guardar</button>
+          <button onclick="cancelEdit(event)">Cancelar</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+
+  <br><br>
+  <button onclick="addData()">Agregar</button>
+
+  <script>
+    function addData() {
+      // Código para agregar una fila a la tabla y consumir el servicio de creación
+    }
+
+    function editData(event) {
+      // Mostrar el formulario de edición y esconder el botón de edición
+      const form = event.target.nextElementSibling;
+      form.style.display = "block";
+      event.target.style.display = "none";
+    }
+
+    function deleteData(event) {
+      // Código para eliminar una fila de la tabla y consumir el servicio de eliminación
+    }
+
+    function cancelEdit(event) {
+      // Esconder el formulario de edición y mostrar el botón de edición
+      const form = event.target.parentElement;
+      form.style.display = "none";
+form.previousElementSibling.style.display = "block";
+}
+
+function saveData(event) {
+  // Código para actualizar los datos de una fila de la tabla y consumir el servicio de actualización
+  event.preventDefault();
+
+  // Obtener los valores de los campos de entrada
+  const form = event.target.parentElement;
+  const nombre = form.querySelector('input[name="nombre"]').value;
+  const apellido = form.querySelector('input[name="apellido"]').value;
+
+  // Actualizar los datos en la tabla
+  const row = form.parentElement.parentElement;
+  row.querySelector('td:first-child').textContent = nombre;
+  row.querySelector('td:nth-child(2)').textContent = apellido;
+
+  // Esconder el formulario y mostrar el botón de edición
+  form.style.display = "none";
+  form.previousElementSibling.style.display = "block";
+}
+  </script>
+</body>
+</html>
