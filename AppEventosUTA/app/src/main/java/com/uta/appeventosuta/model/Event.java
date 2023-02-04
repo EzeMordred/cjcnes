@@ -10,21 +10,26 @@ public class Event {
 
     String id;
     String title;
-    String subtittle;
-    String modality;
+    String subtitle;
+    String location;
     String initDate;
     String finalDate;
+    String type;
+    String image;
 
     public Event() {
     }
 
-    public Event(String id, String title, String subtittle, String modality, String initDate, String finalDate) {
+    public Event(String id, String title, String subtitle, String location,
+                 String initDate, String finalDate, String type, String image) {
         this.id = id;
         this.title = title;
-        this.subtittle = subtittle;
-        this.modality = modality;
+        this.subtitle = subtitle;
+        this.location = location;
         this.initDate = initDate;
         this.finalDate = finalDate;
+        this.type = type;
+        this.image = image;
     }
 
     public static ArrayList<Event> getEventsFromJson(JSONArray jsonArrayEvents) {
@@ -42,12 +47,14 @@ public class Event {
     public static Event jsonToEvent(JSONObject jsonEvent) {
         Event event = new Event();
         try {
-            event.setId(jsonEvent.getString("id_curso"));
+            event.setId(jsonEvent.getString("id_evento"));
             event.setTitle(jsonEvent.getString("titulo"));
-            event.setSubtittle(jsonEvent.getString("subtitulo"));
-            event.setModality(jsonEvent.getString("modalidad"));
-            event.setInitDate(jsonEvent.getString("fecha_inicio_inscripcion"));
-            event.setFinalDate(jsonEvent.getString("fecha_fin_inscripcion"));
+            event.setSubtitle(jsonEvent.getString("subtitulo"));
+            event.setLocation(jsonEvent.getString("ubicacion"));
+            event.setInitDate(jsonEvent.getString("fecha_inicio"));
+            event.setFinalDate(jsonEvent.getString("fecha_fin"));
+            event.setType(jsonEvent.getString("tipo_evento"));
+            event.setImage(jsonEvent.getString("url_imagen"));
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -70,20 +77,20 @@ public class Event {
         this.title = title;
     }
 
-    public String getSubtittle() {
-        return subtittle;
+    public String getSubtitle() {
+        return subtitle;
     }
 
-    public void setSubtittle(String subtittle) {
-        this.subtittle = subtittle;
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
-    public String getModality() {
-        return modality;
+    public String getLocation() {
+        return location;
     }
 
-    public void setModality(String modality) {
-        this.modality = modality;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getInitDate() {
@@ -102,4 +109,19 @@ public class Event {
         this.finalDate = finalDate;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

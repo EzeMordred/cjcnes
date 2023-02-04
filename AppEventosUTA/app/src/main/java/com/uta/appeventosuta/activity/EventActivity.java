@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +21,23 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.appeventosuta.R;
 import com.uta.appeventosuta.adapter.EventAdapter;
+import com.uta.appeventosuta.control.Controller;
+import com.uta.appeventosuta.model.Event;
+import com.uta.appeventosuta.model.Person;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EventActivity extends AppCompatActivity {
 
@@ -36,12 +52,15 @@ public class EventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
         category = getIntent().getStringExtra("category");
+
+        setSupportActionBar(MainActivity.toolbar);
+
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
         changeActionBarTitle(getSupportActionBar());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back);
-        //upArrow.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
+        //-upArrow.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
         recyclerView = findViewById(R.id.rvEvents);
@@ -59,13 +78,11 @@ public class EventActivity extends AppCompatActivity {
         tv.setGravity(Gravity.CENTER);
         tv.setTypeface(null, Typeface.BOLD);
         // Set text to display in TextView
-        tv.setText("Products"); // ActionBar title text
+        tv.setText(category); // ActionBar title text
         tv.setTextSize(20);
-
         // Set the text color of TextView to red
         // This line change the ActionBar title text color
         tv.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-
         // Set the ActionBar display option
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         // Finally, set the newly created TextView as ActionBar custom view
@@ -73,23 +90,36 @@ public class EventActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-
-        /*mAdapter = new EventAdapter(data.getProductList(), this, Tag);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);*/
-
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getEventsCoursesByCategory.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            try {
+                ArrayList<Event> events = Event.getEventsFromJson(new JSONArray(response));
+                eventAdapter = new EventAdapter(events, this, tag);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(eventAdapter);
+            } catch (JSONException e) {
+                System.err.println(e);
+            }
+        }, error -> Toast.makeText(this, Controller.getBigMessage("Error al cargar eventos"),Toast.LENGTH_LONG).show()) {
+            @Override
+            protected Map<String,String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("CATEGORIA", category);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 
     private void setUpGridRecyclerView() {
-
-        /*mAdapter = new EventAdapter(data.getProductList(), this, Tag);
+        /*eventAdapter = new EventAdapter(data.getProductList(), this, tag);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);*/
-
+        recyclerView.setAdapter(eventAdapter);*/
     }
 
     public void onToggleClicked(View view) {

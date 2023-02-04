@@ -58,14 +58,14 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
         final Event event = eventList.get(position);
 
         if(!tag.equalsIgnoreCase("Home")) {
-            holder.subTitle.setText(event.getSubtittle());
-            holder.modality.setText(event.getModality());
+            holder.location.setText(event.getLocation());
         }
 
         holder.title.setText(event.getTitle());
+        holder.subTitle.setText(event.getSubtitle());
         holder.initDate.setText(event.getInitDate());
         holder.finalDate.setText(event.getFinalDate());
-        Picasso.get().load("https://proyectosuta2.000webhostapp.com/eventos_uta/images/courseImage.png")
+        Picasso.get().load(event.getImage())
                 .error(R.drawable.no_image).into(holder.imageView, new Callback() {
             @Override
             public void onSuccess() {
@@ -116,7 +116,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView title, subTitle, modality, initDate, finalDate, signUp;
+        TextView title, subTitle, location, initDate, finalDate, signUp, image;
         ProgressBar progressBar;
         CardView cardView;
 
@@ -126,7 +126,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
             imageView = itemView.findViewById(R.id.eventImage);
             title = itemView.findViewById(R.id.txtEventTittle);
             subTitle = itemView.findViewById(R.id.txtEventSubtittle);
-            modality = itemView.findViewById(R.id.txtEventModality);
+            location = itemView.findViewById(R.id.txtEventLocation);
             initDate = itemView.findViewById(R.id.txtInitDateEvent);
             finalDate = itemView.findViewById(R.id.txtFinalDateEvent);
             signUp = itemView.findViewById(R.id.btnSignUpEvent);

@@ -1,6 +1,7 @@
 package com.uta.appeventosuta.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.appeventosuta.R;
 //import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.uta.appeventosuta.activity.EventActivity;
 import com.uta.appeventosuta.model.Category;
 
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         Category category = categoryList.get(position);
-        holder.title.setText(category.getName());
+        holder.title.setText(String.format("%ss",category.getName()));
         if (tag.equalsIgnoreCase("Category")) {
             Picasso.get()
                     .load(category.getImage())
@@ -76,20 +78,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(context, EventActivity.class);
+                Intent intent = new Intent(context, EventActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("category", holder.title.getText().toString());
-                context.startActivity(intent);*/
+                int size = holder.title.getText().toString().length();
+                intent.putExtra("category", holder.title.getText().toString().substring(0, size - 1));
+                context.startActivity(intent);
             }
         });
 
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(context, EventActivity.class);
+                Intent intent = new Intent(context, EventActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("category", holder.title.getText().toString());
-                context.startActivity(intent);*/
+                int size = holder.title.getText().toString().length();
+                intent.putExtra("category", holder.title.getText().toString().substring(0, size - 1));
+                context.startActivity(intent);
             }
         });
     }

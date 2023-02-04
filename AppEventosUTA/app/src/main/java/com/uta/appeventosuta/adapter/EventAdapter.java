@@ -40,10 +40,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+
         View itemView;
         if (tag.equalsIgnoreCase("List")) {
             itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.row_products, parent, false);
+                    .inflate(R.layout.row_event, parent, false);
         } else {
             itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.row_grid_event, parent, false);
@@ -55,29 +56,24 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         final Event event = eventList.get(position);
 
-        holder.title.setText(product.getTitle());
-        holder.offer.setText(product.getDiscount());
-        holder.attribute.setText(product.getAttribute());
-        holder.currency.setText(product.getCurrency());
-        holder.price.setText(product.getPrice());
+        holder.type.setText(event.getType());
+        holder.title.setText(event.getTitle());
+        holder.subtitle.setText(event.getSubtitle());
+        holder.initDate.setText(event.getInitDate());
+        holder.finalDate.setText(event.getFinalDate());
+        holder.location.setText(event.getLocation());
         Picasso.get()
-                .load(product.getImage())
+                .load(event.getImage())
                 .into(holder.imageView, new Callback() {
                     @Override
                     public void onSuccess() {
                         holder.progressBar.setVisibility(View.GONE);
                     }
-
                     @Override
                     public void onError(Exception e) {
                         Log.d("Error : ", e.getMessage());
                     }
                 });
-
-
-        if (product.getDiscount() == null || product.getDiscount().length() == 0) {
-            holder.offer.setVisibility(View.GONE);
-        }
 
         holder.addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,24 +137,23 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView title;
         ProgressBar progressBar;
         CardView cardView;
-        TextView offer, currency, price, quantity, attribute, addToCart;
+        TextView type, title, subtitle, initDate, finalDate, location, addToCart;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.eventImageR);
-            title = itemView.findViewById(R.id.txtEventTittle);
             progressBar = itemView.findViewById(R.id.progressbarR);
             cardView = itemView.findViewById(R.id.cvEventR);
-            offer = itemView.findViewById(R.id.product_discount);
-            currency = itemView.findViewById(R.id.product_currency);
-            price = itemView.findViewById(R.id.product_price);
-            quantity = itemView.findViewById(R.id.quantity);
+            type = itemView.findViewById(R.id.txtEventTypeR);
+            title = itemView.findViewById(R.id.txtEventTittleR);
+            subtitle = itemView.findViewById(R.id.txtEventSubtittleR);
+            initDate = itemView.findViewById(R.id.txtInitDateEventR);
+            finalDate = itemView.findViewById(R.id.txtFinalDateEventR);
+            location = itemView.findViewById(R.id.txtEventLocationR);
             addToCart = itemView.findViewById(R.id.add_to_cart);
-            attribute = itemView.findViewById(R.id.product_attribute);
         }
     }
 }

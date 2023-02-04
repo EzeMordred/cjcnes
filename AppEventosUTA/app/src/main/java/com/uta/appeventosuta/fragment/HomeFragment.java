@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
         pRecyclerView = view.findViewById(R.id.popular_product_rv);
 
         getCategoryList();
-        getUpcomingEventsList();
+        getUpcomingEventsList(view);
 
         /*pAdapter = new PopularProductAdapter(data.getPopularList(), getContext(), "Home");
         RecyclerView.LayoutManager pLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -190,17 +190,21 @@ public class HomeFragment extends Fragment {
         queue.add(stringRequest);
     }
 
-    private void getUpcomingEventsList() {
+    private void getUpcomingEventsList(View view) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getAllCourses.php";
+        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getUpcomingEventsCourses.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
             try {
-                ArrayList<Event> events = Event.getEventsFromJson(new JSONArray(response));
-                upcomingEventAdapter = new UpcomingEventAdapter(events, getContext(), "Home");
-                RecyclerView.LayoutManager nLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                rvUpcomingEvents.setLayoutManager(nLayoutManager);
-                rvUpcomingEvents.setItemAnimator(new DefaultItemAnimator());
-                rvUpcomingEvents.setAdapter(upcomingEventAdapter);
+                if(response.isEmpty()) {
+                    view.findViewById(R.id.txtUpcomingTitle).setVisibility(View.GONE);
+                } else {
+                    ArrayList<Event> events = Event.getEventsFromJson(new JSONArray(response));
+                    upcomingEventAdapter = new UpcomingEventAdapter(events, getContext(), "Home");
+                    RecyclerView.LayoutManager nLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    rvUpcomingEvents.setLayoutManager(nLayoutManager);
+                    rvUpcomingEvents.setItemAnimator(new DefaultItemAnimator());
+                    rvUpcomingEvents.setAdapter(upcomingEventAdapter);
+                }
             } catch (JSONException e) {
                 System.err.println(e);
             }

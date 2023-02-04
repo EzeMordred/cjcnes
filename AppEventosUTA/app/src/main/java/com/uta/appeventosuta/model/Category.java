@@ -37,7 +37,7 @@ public class Category {
         try {
             category.setId(jsonCategory.getString("id_categoria"));
             category.setName(jsonCategory.getString("nombre"));
-            category.setImage(jsonCategory.getString("imagen"));
+            category.setImage(jsonCategory.getString("url_imagen"));
         } catch(Exception e) {
             e.printStackTrace();
         }

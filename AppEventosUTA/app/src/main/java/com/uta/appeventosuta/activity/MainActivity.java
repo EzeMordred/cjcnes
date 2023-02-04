@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Toolbar toolbar;
+    public static Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

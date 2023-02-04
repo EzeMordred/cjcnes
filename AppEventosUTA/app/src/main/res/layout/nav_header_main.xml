@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
+        android:gravity="center"
         android:paddingTop="@dimen/header_margin"
         android:text="EVENTOS UTA"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
