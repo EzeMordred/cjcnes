@@ -12,27 +12,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:padding="5dp"
-            android:text="CÉDULA:"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtIdP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:padding="5dp"
-            android:textColor="@color/dark_text"
-            android:textSize="@dimen/text"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,23 +75,43 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textView13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:padding="5dp"
-            android:text="USUARIO:"
+            android:text="TELÉFONO"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtUsernameP"
+            android:id="@+id/txtPhoneP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:padding="5dp"
-            android:text="CHRISTIAN10"
+            android:textColor="@color/dark_text"
+            android:textSize="@dimen/text"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:padding="5dp"
+            android:text="ROL:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtRoleP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:padding="5dp"
             android:textColor="@color/dark_text"
             android:textSize="@dimen/text"
             android:textStyle="bold" />

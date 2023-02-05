@@ -28,7 +28,6 @@ import org.json.JSONException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RecoverPasswordActivity extends AppCompatActivity {
 
@@ -48,7 +47,8 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recover_password);
 
-        Toolbar toolbar = findViewById(R.id.toolbarRP);
+        Toolbar toolbar = findViewById(R.id.toolbarRecoveryPassword);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -180,7 +180,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams() {
                 Map<String,String> params = new HashMap<>();
-                params.put("CREDENCIAL", user.getId());
+                params.put("CREDENCIAL", user.getName());
                 return params;
             }
         };

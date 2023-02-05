@@ -49,7 +49,6 @@ public class HomeFragment extends Fragment {
     LinearLayout sliderDotspanel;
     Timer timer;
     int page_position = 0;
-    //Data data;
     private int dotscount;
     private ImageView[] dots;
     private List<Category> categoryList = new ArrayList<>();
@@ -58,22 +57,15 @@ public class HomeFragment extends Fragment {
     private UpcomingEventAdapter upcomingEventAdapter;
     //private PopularProductAdapter pAdapter;
     private Integer[] images = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4, R.drawable.slider5};
-    private Context context;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-    public HomeFragment(Context context) {
-        this.context = context;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        //data = new Data();
         rvCategories = view.findViewById(R.id.rvCategoriesH);
         rvUpcomingEvents = view.findViewById(R.id.rvUpcomingEventsH);
         pRecyclerView = view.findViewById(R.id.popular_product_rv);
@@ -107,7 +99,7 @@ public class HomeFragment extends Fragment {
             sliderDotspanel.addView(dots[i], params);
         }
 
-        dots[0].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.active_dot));
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.active_dot));
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -116,9 +108,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 for (int i = 0; i < dotscount; i++) {
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.non_active_dot));
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.non_active_dot));
                 }
-                dots[position].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.active_dot));
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.active_dot));
             }
 
             @Override
@@ -173,7 +165,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getCategoryList() {
-        RequestQueue queue = Volley.newRequestQueue(context);
+        RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getAllCategories.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
             try {
@@ -186,13 +178,13 @@ public class HomeFragment extends Fragment {
             } catch (JSONException e) {
                 System.err.println(e);
             }
-        }, error -> Toast.makeText(context, Controller.getBigMessage("Error al cargar categorías"),Toast.LENGTH_LONG).show());
+        }, error -> Toast.makeText(getContext(), Controller.getBigMessage("Error al cargar categorías"),Toast.LENGTH_LONG).show());
         queue.add(stringRequest);
     }
 
     private void getUpcomingEventsList(View view) {
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getUpcomingEventsCourses.php";
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getTopUpcomingEvents.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
             try {
                 if(response.isEmpty()) {
@@ -208,7 +200,7 @@ public class HomeFragment extends Fragment {
             } catch (JSONException e) {
                 System.err.println(e);
             }
-        }, error -> Toast.makeText(context, Controller.getBigMessage("Error al cargar eventos"),Toast.LENGTH_LONG).show());
+        }, error -> Toast.makeText(getContext(), Controller.getBigMessage("Error al cargar eventos"),Toast.LENGTH_LONG).show());
         queue.add(stringRequest);
     }
 

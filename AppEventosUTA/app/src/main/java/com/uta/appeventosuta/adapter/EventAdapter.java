@@ -40,7 +40,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-
         View itemView;
         if (tag.equalsIgnoreCase("List")) {
             itemView = LayoutInflater.from(parent.getContext())
@@ -75,7 +74,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
                     }
                 });
 
-        holder.addToCart.setOnClickListener(new View.OnClickListener() {
+        holder.signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -139,7 +138,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         ImageView imageView;
         ProgressBar progressBar;
         CardView cardView;
-        TextView type, title, subtitle, initDate, finalDate, location, addToCart;
+        TextView type, title, subtitle, initDate, finalDate, location, signUp;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -153,7 +152,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             initDate = itemView.findViewById(R.id.txtInitDateEventR);
             finalDate = itemView.findViewById(R.id.txtFinalDateEventR);
             location = itemView.findViewById(R.id.txtEventLocationR);
-            addToCart = itemView.findViewById(R.id.add_to_cart);
+            signUp = itemView.findViewById(R.id.btnSignUpEventR);
         }
     }
 }

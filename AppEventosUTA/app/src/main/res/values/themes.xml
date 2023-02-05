@@ -46,4 +46,9 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="AppTheme.AppBar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
 </resources>

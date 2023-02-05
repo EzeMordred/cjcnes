@@ -4,11 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Person {
+public class Person implements Serializable {
 
-    private String id, name, lastName, birthDate, email, user;
+    private String name, lastName, birthDate, email, phone, role;
 
     public Person() {
     }
@@ -28,24 +29,30 @@ public class Person {
     public static Person jsonToPerson(JSONObject jsonPerson) {
         Person person = new Person();
         try {
-            person.setId(jsonPerson.getString("id_persona"));
             person.setName(jsonPerson.getString("primer_nombre"));
             person.setLastName(jsonPerson.getString("primer_apellido"));
             person.setBirthDate(jsonPerson.getString("fecha_nacimiento"));
             person.setEmail(jsonPerson.getString("email"));
-            //person.setUser(jsonPerson.getString(""));
+            person.setPhone(jsonPerson.getString("telefono"));
+            getUserRole(person, jsonPerson);
         } catch(Exception e) {
             e.printStackTrace();
         }
         return person;
     }
 
-    public String getId() {
-        return id;
-    }
+    private final static String[] roles = {"administrador", "estudiante", "egresado",
+                                    "docente", "administrativo", "particular"};
 
-    public void setId(String id) {
-        this.id = id;
+    private static void getUserRole(Person person, JSONObject jsonPerson) throws JSONException {
+        StringBuilder userRoles = new StringBuilder();
+        for (String rol : roles) {
+            if (jsonPerson.getString(rol).equals("1")) {
+                int size = rol.length();
+                userRoles.append(String.format("%s%s\n", rol.substring(0, 1).toUpperCase(), rol.substring(1)));
+            }
+        }
+        person.setRole(userRoles.toString());
     }
 
     public String getName() {
@@ -80,11 +87,19 @@ public class Person {
         this.email = email;
     }
 
-    public String getUser() {
-        return user;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

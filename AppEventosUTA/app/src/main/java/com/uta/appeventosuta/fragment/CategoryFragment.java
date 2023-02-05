@@ -38,16 +38,9 @@ public class CategoryFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private Context context;
-
-    public CategoryFragment(Context context) {
-        this.context = context;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category, container, false);
         rvCategories = view.findViewById(R.id.rvCategoriesF);
         getCategoryList();
@@ -61,7 +54,7 @@ public class CategoryFragment extends Fragment {
     }
 
     private void getCategoryList() {
-        RequestQueue queue = Volley.newRequestQueue(context);
+        RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getAllCategories.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
             try {
@@ -74,7 +67,7 @@ public class CategoryFragment extends Fragment {
             } catch (JSONException e) {
                 System.err.println(e);
             }
-        }, error -> Toast.makeText(context, Controller.getBigMessage("Error al cargar categorías"),Toast.LENGTH_LONG).show());
+        }, error -> Toast.makeText(getContext(), Controller.getBigMessage("Error al cargar categorías"),Toast.LENGTH_LONG).show());
         queue.add(stringRequest);
     }
 

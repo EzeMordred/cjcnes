@@ -14,13 +14,19 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.appeventosuta.R;
 import com.uta.appeventosuta.control.Controller;
+import com.uta.appeventosuta.model.Person;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText txtUser, txtPassword;
+    private EditText txtUser, txtPassword;
+    private Person loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +55,12 @@ public class LoginActivity extends AppCompatActivity {
         String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/login.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             if (!response.isEmpty()) {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                finish();
+                try {
+                    loggedInUser = Person.jsonToPerson(new JSONObject(response));
+                    loadMain();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             } else {
                 Toast.makeText(this, Controller.getBigMessage("Credenciales incorrectas"), Toast.LENGTH_LONG).show();
             }
@@ -64,6 +74,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
+    }
+
+    private void loadMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", loggedInUser);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     public void loadSignIn(View v) {

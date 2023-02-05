@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import com.uta.appeventosuta.model.Event;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdapter.MyViewHolder> {
 
@@ -48,7 +49,6 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
             itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.row_upcoming_event, parent, false);
         }
-
         return new MyViewHolder(itemView);
     }
 
@@ -59,6 +59,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
 
         if(!tag.equalsIgnoreCase("Home")) {
             holder.location.setText(event.getLocation());
+            holder.type.setText(event.getType().toUpperCase());
         }
 
         holder.title.setText(event.getTitle());
@@ -116,23 +117,23 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView title, subTitle, location, initDate, finalDate, signUp, image;
+        TextView title, subTitle, initDate, finalDate, location, type, signUp;
         ProgressBar progressBar;
         CardView cardView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             imageView = itemView.findViewById(R.id.eventImage);
-            title = itemView.findViewById(R.id.txtEventTittle);
-            subTitle = itemView.findViewById(R.id.txtEventSubtittle);
-            location = itemView.findViewById(R.id.txtEventLocation);
-            initDate = itemView.findViewById(R.id.txtInitDateEvent);
-            finalDate = itemView.findViewById(R.id.txtFinalDateEvent);
-            signUp = itemView.findViewById(R.id.btnSignUpEvent);
             progressBar = itemView.findViewById(R.id.progressbarR);
             cardView = itemView.findViewById(R.id.cvEvent);
 
+            title = itemView.findViewById(R.id.txtEventTittle);
+            subTitle = itemView.findViewById(R.id.txtEventSubtittle);
+            initDate = itemView.findViewById(R.id.txtInitDateEvent);
+            finalDate = itemView.findViewById(R.id.txtFinalDateEvent);
+            location = itemView.findViewById(R.id.txtEventLocation);
+            type = itemView.findViewById(R.id.txtEventType);
+            signUp = itemView.findViewById(R.id.btnSignUpEvent);
         }
     }
 }

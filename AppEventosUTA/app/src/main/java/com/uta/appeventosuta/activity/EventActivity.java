@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,30 +42,42 @@ import java.util.Map;
 
 public class EventActivity extends AppCompatActivity {
 
-    private static int cart_count = 0;
-    EventAdapter eventAdapter;
-    String tag = "List", category;
+    private EventAdapter eventAdapter;
+    private String tag = "List", category;
     private RecyclerView recyclerView;
+    private ArrayList<Event> events;
 
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
+        events = new ArrayList<>();
+        recyclerView = findViewById(R.id.rvEvents);
         category = getIntent().getStringExtra("category");
 
-        setSupportActionBar(MainActivity.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarEvent);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setTitle(String.format("Categorías | %ss", category));
+        setSupportActionBar(toolbar);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
-        changeActionBarTitle(getSupportActionBar());
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
+        //changeActionBarTitle(getSupportActionBar());
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back);
         //-upArrow.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        //getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-        recyclerView = findViewById(R.id.rvEvents);
-        setUpRecyclerView();
+        getEventList();
+
     }
 
     private void changeActionBarTitle(ActionBar actionBar) {
@@ -89,12 +102,42 @@ public class EventActivity extends AppCompatActivity {
         actionBar.setCustomView(tv);
     }
 
-    private void setUpRecyclerView() {
+    private void getEventList() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getEventsCoursesByCategory.php";
+        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getAllEventsByCategory.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             try {
-                ArrayList<Event> events = Event.getEventsFromJson(new JSONArray(response));
+                events = Event.getEventsFromJson(new JSONArray(response));
+                setUpRecyclerView();
+            } catch (JSONException e) {
+                System.err.println(e);
+            }
+        }, error -> Toast.makeText(this, Controller.getBigMessage("Error al cargar eventos"),Toast.LENGTH_LONG).show()) {
+            @Override
+            protected Map<String,String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("CATEGORIA", category);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    private void setUpRecyclerView() {
+        if(events.isEmpty()) {
+            getEventList();
+        }
+        eventAdapter = new EventAdapter(events, this, tag);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(eventAdapter);
+
+        /*RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getAllEventsByCategory.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            try {
+                events = Event.getEventsFromJson(new JSONArray(response));
                 eventAdapter = new EventAdapter(events, this, tag);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -111,15 +154,18 @@ public class EventActivity extends AppCompatActivity {
                 return params;
             }
         };
-        queue.add(stringRequest);
+        queue.add(stringRequest);*/
     }
 
     private void setUpGridRecyclerView() {
-        /*eventAdapter = new EventAdapter(data.getProductList(), this, tag);
+        if (events.isEmpty()) {
+            getEventList();
+        }
+        eventAdapter = new EventAdapter(events, this, tag);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(eventAdapter);*/
+        recyclerView.setAdapter(eventAdapter);
     }
 
     public void onToggleClicked(View view) {
@@ -130,18 +176,6 @@ public class EventActivity extends AppCompatActivity {
             tag = "List";
             setUpRecyclerView();
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {// todo: goto back activity from here
-            Intent intent = new Intent(EventActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }

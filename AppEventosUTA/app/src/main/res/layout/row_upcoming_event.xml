@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-   * Grocery App
-   * https://github.com/quintuslabs/GroceryStore
-   * Created on 18-Feb-2019.
-   * Created by : Santosh Kumar Dash:- http://santoshdash.epizy.com
-   -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -15,187 +10,167 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="3dp"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_margin="2dp">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/txtEventType"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/category_textview_bg"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="3dp"
+                android:text="CURSO"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/eventImage"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:scaleType="fitXY" />
-
-                <ProgressBar
-                    android:id="@+id/progressbarR"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp" />
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/txtEventLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="Ubicación"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_below="@id/txtEventType"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txtEventTittle"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="15dp"
-                    android:text="Título"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txtEventSubtittle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="Subtítulo"
-                    android:textSize="16dp" />
+                    <ImageView
+                        android:id="@+id/eventImage"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:scaleType="fitXY" />
 
-                <LinearLayout
+                    <ProgressBar
+                        android:id="@+id/progressbarR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_gravity="end">
+
+                    <TextView
+                        android:id="@+id/txtEventTittle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Título"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtEventSubtittle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtEventTittle"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Subtítulo"
+                        android:textAlignment="textStart"
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/txtInitDateEvent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
+                        android:layout_below="@id/txtEventSubtittle"
                         android:text="08-01-2023"
-                        android:textSize="16dp" />
+                        android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/slashDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:text=" - "
-                        android:textSize="20dp" />
+                        android:layout_alignBaseline="@id/txtInitDateEvent"
+                        android:layout_toEndOf="@id/txtInitDateEvent"
+                        android:text=" / "
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/txtFinalDateEvent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:layout_marginLeft="5dp"
+                        android:layout_alignBaseline="@id/slashDate"
+                        android:layout_toEndOf="@id/slashDate"
                         android:text="11-01-2023"
-                        android:textSize="16dp" />
+                        android:textSize="18dp" />
+
+                </RelativeLayout>
 
 
-                </LinearLayout>
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtEventLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="Ubicación"
-                    android:textSize="16dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="10dp">
+                    android:layout_gravity="end">
 
                     <TextView
                         android:id="@+id/btnSignUpEvent"
                         style="@android:style/MediaButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gradient_bg"
                         android:padding="10dp"
-                        android:text="Inscríbete"
-                        android:textColor="@color/white" />
+                        android:text=" Inscríbete "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:drawableLeftCompat="@drawable/ic_baseline_add" />
 
-                    <LinearLayout
-                        android:id="@+id/quantity_ll"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="11dp"
-                        android:background="@drawable/gradient_bg"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:id="@+id/quantity_minus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:paddingLeft="12dp"
-                            android:paddingTop="5dp"
-                            android:paddingRight="12dp"
-                            android:paddingBottom="5dp"
-                            android:text="-"
-                            android:textColor="@color/white"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txtEventLocationR"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:paddingLeft="5dp"
-                            android:paddingTop="5dp"
-                            android:paddingRight="5dp"
-                            android:paddingBottom="5dp"
-                            android:text="1"
-                            android:textColor="@color/white"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/quantity_plus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:paddingLeft="12dp"
-                            android:paddingTop="5dp"
-                            android:paddingRight="12dp"
-                            android:paddingBottom="5dp"
-                            android:text="+"
-                            android:textColor="@color/white"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
                 </RelativeLayout>
-            </LinearLayout>
+            </RelativeLayout>
 
+        </RelativeLayout>
 
-        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

@@ -26,6 +26,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.uta.appeventosuta.fragment.CategoryFragment;
 import com.uta.appeventosuta.fragment.HomeFragment;
 import com.uta.appeventosuta.fragment.ProfileFragment;
+import com.uta.appeventosuta.fragment.UpcomingEventFragment;
+import com.uta.appeventosuta.model.Person;
 
 import java.util.ArrayList;
 
@@ -33,12 +35,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static Toolbar toolbar;
 
+    private Person loggedInUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.toolbar);
+        Bundle bundle = getIntent().getExtras();
+        loggedInUser = (Person) bundle.getSerializable("user");
+
+        toolbar = findViewById(R.id.toolbarActivity);
         setSupportActionBar(toolbar);
         centerToolbarTitle(toolbar);
 
@@ -97,19 +104,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Inicializar el fragmento seleccionado
         switch (itemId) {
             case R.id.navHome:
-                fragment = new HomeFragment(this);
+                fragment = new HomeFragment();
                 break;
             case R.id.navProfile:
-                fragment = new ProfileFragment("1805155569", this);
+                fragment = new ProfileFragment(loggedInUser);
                 break;
             case R.id.navCertificates:
                 //fragment = new CategoryFragment();
                 break;
             case R.id.navUpcomingEvents:
-                //fragment = new PopularProductFragment();
+                fragment = new UpcomingEventFragment();
                 break;
             case R.id.navCategories:
-                fragment = new CategoryFragment(this);
+                fragment = new CategoryFragment();
                 break;
             /*case R.id.navTest:
                 startActivity(new Intent(getApplicationContext(), CartActivity.class));
