@@ -67,7 +67,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loadSignIn(View v) {
-        startActivity(new Intent(getApplicationContext(),SignInActivity.class));
+        startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+        finish();
+    }
+
+    public void loadRecoverPassword(View v) {
+        startActivity(new Intent(getApplicationContext(), RecoverPasswordActivity.class));
         finish();
     }
 

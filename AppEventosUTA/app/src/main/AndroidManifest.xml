@@ -40,6 +40,10 @@
             android:name="com.uta.appeventosuta.activity.EventActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
+        <activity
+            android:name="com.uta.appeventosuta.activity.RecoverPasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -92,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/roboto_light"
+                    android:onClick="loadRecoverPassword"
                     android:text="¿Olvidaste tu contraseña?"
                     android:textColor="@color/light_text"
                     android:textSize="20sp" />
