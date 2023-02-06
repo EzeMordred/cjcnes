@@ -148,26 +148,20 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/content">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/btnSignUpEvent"
+                    style="@android:style/MediaButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end">
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/gradient_bg"
+                    android:padding="10dp"
+                    android:text=" Inscríbete "
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:drawableLeftCompat="@drawable/ic_baseline_add" />
 
-                    <TextView
-                        android:id="@+id/btnSignUpEvent"
-                        style="@android:style/MediaButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/gradient_bg"
-                        android:padding="10dp"
-                        android:text=" Inscríbete "
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        app:drawableLeftCompat="@drawable/ic_baseline_add" />
-
-                </RelativeLayout>
             </RelativeLayout>
 
         </RelativeLayout>
