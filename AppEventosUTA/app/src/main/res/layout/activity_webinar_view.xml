@@ -4,11 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:titleTextAppearance="@style/AppTheme.AppBar.TitleText" />
+
     <ScrollView
         android:id="@+id/ScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/SignUp">
+        android:layout_above="@id/SignUp"
+        android:layout_below="@id/toolbar"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,6 +36,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtTitleW"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtWebinar"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:elegantTextHeight="true"
+                        android:fontFamily="@font/poppins"
+                        android:text="Webinarios internacionales especializados virtuales para docentes de las facultades de la Universidad Técnica de Ambato"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorDarkGrayUTA"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/imgUTA"
@@ -54,24 +82,7 @@
                         android:textSize="22sp" />
 
                     <TextView
-                        android:id="@+id/txtTitleW"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtWebinar"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:elegantTextHeight="true"
-                        android:fontFamily="@font/poppins"
-                        android:text="Webinarios internacionales especializados virtuales para docentes de las facultades de la Universidad Técnica de Ambato"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorDarkGrayUTA"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtDateTime"
+                        android:id="@+id/txtDateTimeW"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtTitleW"
@@ -88,10 +99,10 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/transmisionTitle"
+                        android:id="@+id/transmissionTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txtDateTime"
+                        android:layout_below="@id/txtDateTimeW"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
@@ -105,12 +116,13 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/imgTransmition"
+                        android:id="@+id/imgTransmission"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/transmisionTitle"
+                        android:layout_below="@id/transmissionTitle"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
                         app:srcCompat="@drawable/ic_home" />
 
@@ -118,7 +130,7 @@
                         android:id="@+id/txtTransmition2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/imgTransmition"
+                        android:layout_below="@id/imgTransmission"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
@@ -127,7 +139,8 @@
                         android:text="https://cedia.zoom.us/j/89539441967"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorLightGrayUTA"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -147,10 +160,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
-                        app:srcCompat="@drawable/PonenteWebinar" />
+                        app:srcCompat="@drawable/ponente" />
 
                     <TextView
-                        android:id="@+id/txtSpeakerName"
+                        android:id="@+id/txtSpeakerNameW"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/imgSpeaker"
@@ -166,10 +179,10 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/txtSpeakerJob"
+                        android:id="@+id/txtSpeakerJobW"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txtSpeakerName"
+                        android:layout_below="@id/txtSpeakerNameW"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="10dp"
@@ -186,11 +199,12 @@
                         android:id="@+id/rvOrganizer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txtSpeakerJob"
+                        android:layout_below="@id/txtSpeakerJobW"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_marginBottom="10dp"
+                        android:nestedScrollingEnabled="false" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -209,11 +223,11 @@
             android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="INSCRÍBETE"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="ENTRAR"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="22sp" />

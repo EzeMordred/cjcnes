@@ -1,6 +1,7 @@
 package com.uta.appeventosuta.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appeventosuta.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.uta.appeventosuta.activity.MainActivity;
+import com.uta.appeventosuta.activity.WebinarViewActivity;
 import com.uta.appeventosuta.model.Event;
 
 import java.util.ArrayList;
@@ -77,31 +80,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         holder.signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*holder.addToCart.setVisibility(View.GONE);
-                holder.subTotal.setVisibility(View.VISIBLE);
-
-                _price = product.getPrice();
-                _quantity = holder.quantity.getText().toString();
-                _attribute = product.getAttribute();
-
-                if (Integer.parseInt(_quantity) != 0) {
-                    _subtotal = String.valueOf(Double.parseDouble(_price) * Integer.parseInt(_quantity));
-                    holder.subTotal.setText(_quantity + "X" + _price + "= Rs." + _subtotal);
-                    if (context instanceof ProductActivity) {
-                        Cart cart = new Cart(product.getId(), product.getTitle(), product.getImage(), product.getCurrency(), _price, _attribute, _quantity, _subtotal);
-                        cartList = ((BaseActivity) context).getCartList();
-                        cartList.add(cart);
-                        String cartStr = gson.toJson(cartList);
-                        //Log.d("CART", cartStr);
-                        localStorage.setCart(cartStr);
-                        ((AddorRemoveCallbacks) context).onAddProduct();
-                        notifyItemChanged(position);
-                    }
-                } else {
-                    Toast.makeText(context, "Please Add Quantity", Toast.LENGTH_SHORT).show();
-                }*/
-
+                Intent intent = new Intent();
+                switch (event.getType()) {
+                    case "Webinar":
+                        intent = new Intent(context, WebinarViewActivity.class);
+                        break;
+                }
+                intent.putExtra("id", event.getId());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intent);
             }
         });
 

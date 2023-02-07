@@ -28,6 +28,12 @@ import org.json.JSONException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.mail.*;
+import javax.mail.internet.*;
 
 public class RecoverPasswordActivity extends AppCompatActivity {
 
@@ -101,8 +107,90 @@ public class RecoverPasswordActivity extends AppCompatActivity {
 
     public void sendRequest(View v) {
         if (validateData() && btnSend.isEnabled()) {
-            //solicitarCodigo();
+            sendCode();
         }
+    }
+
+    private void sendCode() {
+        if (user != null) {
+            sendEmailCode(user.getEmail());
+            unlockCodeView();
+        }
+    }
+
+    private void sendEmailCode(String destinatario) {
+        Properties propiedad = new Properties();
+        propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
+        propiedad.setProperty("mail.smtp.starttls.enable", "true");
+        propiedad.setProperty("mail.smtp.port", "587");
+        propiedad.setProperty("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(propiedad);
+
+        String emisor = "idktechnologiesma@gmail.com";
+        String clave = "nuestraempresa";
+        String asunto = "IDK: Recuperación de contraseña";
+        String codigo = generateCode();
+        String mensaje = "<table style=\"max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;\">\n"
+                + "\n"
+                + "            <tr>\n"
+                + "                <td style=\"padding: 0\">\n"
+                + "                    <img style=\"padding: 0; display: block\" src=\"https://i.postimg.cc/L8mpNs6q/Whats-App-Image-2022-01-17-at-7-09-25-PM.jpg\" width=\"100%\">\n"
+                + "                </td>\n"
+                + "            </tr>\n"
+                + "\n"
+                + "            <tr>\n"
+                + "                <td style=\"background-color: #ecf0f1\">\n"
+                + "                    <div style=\"color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif\">\n"
+                + "                        <h2 style=\"color: #2991f9; margin: 0 0 7px\">Hola,</h2>\n"
+                + "                        <p style=\"margin: 2px; font-size: 15px\">\n"
+                + "                            usted ha solicitado recuperar su contraseña.<br><br>\n"
+                + "                            Su código de verificación es:</p>\n"
+                + "                        <p>"
+                + codigo
+                + "                        </p>\n"
+                + "\n"
+                + "                        <p style=\"color: #b3b3b3; font-size: 12px; text-align: center;margin: 30px 0 0\">IDK-Technologies 2022.</p>\n"
+                + "                    </div>\n"
+                + "                </td>\n"
+                + "            </tr>\n"
+                + "            <tr>\n"
+                + "                <td style=\"padding: 0\">\n"
+                + "                    <img style=\"padding: 0; display: block\" src=\"https://i.postimg.cc/8C3xQkDm/Whats-App-Image-2022-01-17-at-7-09-25-PM-1.jpg\" width=\"100%\">\n"
+                + "                </td>\n"
+                + "            </tr>\n"
+                + "        </table>";
+
+        MimeMessage mail = new MimeMessage(session);
+
+        try {
+            mail.setFrom(new InternetAddress(emisor));
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            mail.setSubject(asunto);
+            mail.setContent(mensaje, "text/html; charset=utf-8");
+
+            Transport transporte = session.getTransport("smtp");
+            transporte.connect(emisor, clave);
+            transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+            transporte.close();
+
+            backUpCode(codigo);
+            Toast.makeText(this, Controller.getBigMessage("Te hemos enviado un correo\ncon tu clave de recuperación"),Toast.LENGTH_LONG).show();
+        } catch (MessagingException ex) {
+            Log.d(this.getClass().getSimpleName(), ex.toString());
+        }
+    }
+
+    private String generateCode() {
+        String code = "";
+        for (int i = 0; i < 4; i++) {
+            code += String.valueOf((int) Math.floor(Math.random() * (9) + 1));
+        }
+        return code;
+    }
+
+    private void backUpCode(String code) {
+        
     }
 
     private boolean validateData() {

@@ -14,10 +14,7 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+        android:padding="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,8 +24,8 @@
                 android:id="@+id/imgOrganizer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:layout_margin="10dp"
+                android:adjustViewBounds="true" />
 
             <ProgressBar
                 android:id="@+id/progressbar"

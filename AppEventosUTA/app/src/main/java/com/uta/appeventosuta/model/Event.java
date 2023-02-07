@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 public class Event {
 
-    String id;
-    String title;
-    String subtitle;
-    String location;
-    String initDate;
-    String finalDate;
-    String type;
-    String image;
+    private String id;
+    private String title;
+    private String subtitle;
+    private String location;
+    private String initDate;
+    private String finalDate;
+    private String type;
+    private String image;
 
     public Event() {
     }

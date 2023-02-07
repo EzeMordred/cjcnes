@@ -38,8 +38,8 @@ public class OrganizerAdapter extends RecyclerView.Adapter<OrganizerAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        Organizer offer = organizerList.get(position);
-        Picasso.get().load(offer.getImage()).error(R.drawable.no_image).into(holder.imageView, new Callback() {
+        Organizer organizer = organizerList.get(position);
+        Picasso.get().load(organizer.getImage()).error(R.drawable.no_image).into(holder.imageView, new Callback() {
             @Override
             public void onSuccess() {
                 holder.progressBar.setVisibility(View.GONE);
