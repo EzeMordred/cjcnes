@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:titleTextAppearance="@style/AppTheme.AppBar.TitleText" />
+
+    <ScrollView
+        android:id="@+id/ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/SignUp"
+        android:layout_below="@id/toolbar"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/ColumnA"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtEvento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@color/colorDarkRedUTA"
+                        android:elegantTextHeight="true"
+                        android:padding="5dp"
+                        android:text="CONFERENCIAS"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtTemática"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtEvento"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:elegantTextHeight="true"
+                        android:text="EMPLEABILIDAD PARA PROFESIONALES EN"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/colorDarkGrayUTA"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtTemática2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTemática"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:elegantTextHeight="true"
+                        android:text="TECNOLOGÍA DE FORMA REMOTA"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorDarkRedUTA"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtTemática3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTemática2"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:elegantTextHeight="true"
+                        android:text="Y SUS ÁREAS DE APLICACIÓN EN LA ACTUALIDAD"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/colorDarkGrayUTA"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgFoto1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/txtTemática3"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/ponente" />
+
+                    <TextView
+                        android:id="@+id/txtPresencial"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgFoto1"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:elegantTextHeight="true"
+                        android:text="Modalidad:"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorDarkRedUTA"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtPresencial2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtPresencial"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:elegantTextHeight="true"
+                        android:text="Presencial"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorDarkGrayUTA"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgFoto2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtPresencial2"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_home" />
+
+                    <TextView
+                        android:id="@+id/txtUbicación"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgFoto2"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:elegantTextHeight="true"
+                        android:text="Ubicación:"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorDarkRedUTA"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtUbicación2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtUbicación"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:elegantTextHeight="true"
+                        android:text="Auditorio FISEI"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorDarkGrayUTA"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgFoto3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtUbicación2"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_home" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ColumnB"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imgUTA2"
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/uta300" />
+
+                    <TextView
+                        android:id="@+id/txtFecha2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgUTA2"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:drawableStart="@drawable/ic_calendar_red"
+                        android:elegantTextHeight="true"
+                        android:text="12 y 13 de OCTUBRE"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorLightRedUTA"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/txtAgenda"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtFecha2"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@color/colorLightGrayUTA"
+                        android:elegantTextHeight="true"
+                        android:padding="5dp"
+                        android:paddingEnd="10dp"
+                        android:text="VISUALIZAR AGENDA"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtInf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtAgenda"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:elegantTextHeight="true"
+                        android:text="Información:"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorLightGrayUTA"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtInf2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtInf"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@color/colorLightGrayUTA"
+                        android:elegantTextHeight="true"
+                        android:padding="5dp"
+                        android:paddingEnd="10dp"
+                        android:text="Mg. Santiago Jara - 0987417045\nMg. Leonardo Torres - 0987970966"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvOrganizer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtInf2"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:nestedScrollingEnabled="false" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/SignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="ENTRAR"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+    </RelativeLayout>
+</RelativeLayout>

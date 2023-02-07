@@ -194,7 +194,7 @@ public class SignInActivity extends AppCompatActivity {
         String urlAccount = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/saveAccount.php";
         StringRequest requestAccount = new StringRequest(Request.Method.POST, urlAccount, response -> {
             Toast.makeText(this,Controller.getBigMessage("Ya puedes iniciar sesión"),Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             finish();
         }, error -> Toast.makeText(this,Controller.getBigMessage("Inténtelo más tarde"),Toast.LENGTH_LONG).show())
         {
@@ -208,6 +208,11 @@ public class SignInActivity extends AppCompatActivity {
             }
         };
         queue.add(requestAccount);
+    }
+
+    public void returnToLogin(View v) {
+        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        finish();
     }
 
 }

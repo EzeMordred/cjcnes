@@ -21,10 +21,12 @@ import com.android.volley.toolbox.Volley;
 import com.example.appeventosuta.R;
 import com.uta.appeventosuta.control.Controller;
 import com.uta.appeventosuta.control.Validation;
+import com.uta.appeventosuta.mail.SendEmail;
 import com.uta.appeventosuta.model.Person;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +49,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
     private RequestQueue queue;
     private Person user;
     private Boolean request = false;
+    private boolean userR = false, mailR = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +109,14 @@ public class RecoverPasswordActivity extends AppCompatActivity {
     }
 
     public void sendRequest(View v) {
-        if (validateData() && btnSend.isEnabled()) {
+        //registeredUser();
+
+        SendEmail sendEmail = new SendEmail();
+        sendEmail.execute("alexjaramillonxn@gmail.com");
+
+        /*if (validateData() && btnSend.isEnabled()) {
             sendCode();
-        }
+        }*/
     }
 
     private void sendCode() {
@@ -118,7 +126,31 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         }
     }
 
-    private void sendEmailCode(String destinatario) {
+    public void sendEmailCode(String destino) {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("idktechnologiesma@gmail.com", "nuestraempresa");
+            }
+        });
+        try {
+            Message emailMessage = new MimeMessage(session);
+            emailMessage.setFrom(new InternetAddress("idktechnologiesma@gmail.com"));
+            emailMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destino));
+            emailMessage.setSubject("Prueba");
+            emailMessage.setContent("<h1>Code: <h1><br>" + generateCode() + "", "text/html; charset=utf-8");
+            Transport.send(emailMessage);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*private void sendEmailCode(String destinatario) {
         Properties propiedad = new Properties();
         propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
         propiedad.setProperty("mail.smtp.starttls.enable", "true");
@@ -176,10 +208,12 @@ public class RecoverPasswordActivity extends AppCompatActivity {
 
             backUpCode(codigo);
             Toast.makeText(this, Controller.getBigMessage("Te hemos enviado un correo\ncon tu clave de recuperación"),Toast.LENGTH_LONG).show();
+        } catch (AddressException ex) {
+            Log.d(this.getClass().getSimpleName(), ex.toString());
         } catch (MessagingException ex) {
             Log.d(this.getClass().getSimpleName(), ex.toString());
         }
-    }
+    }*/
 
     private String generateCode() {
         String code = "";
@@ -190,17 +224,28 @@ public class RecoverPasswordActivity extends AppCompatActivity {
     }
 
     private void backUpCode(String code) {
-        
+        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/saveRequestCodeById.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+        }, error -> Log.d(this.getClass().getSimpleName(), "Error de conexión. Código.")) {
+            @Override
+            protected Map<String,String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("ID_PERSONA", txtUserEmail.getText().toString());
+                params.put("CODIGO", code);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 
     private boolean validateData() {
-        if (!registeredUser() && !registeredMail()) {
+        if (!userR && !mailR) {
             Toast.makeText(this, Controller.getBigMessage("Usuario no encontrado"),Toast.LENGTH_LONG).show();
             txtUserEmail.requestFocus();
             txtUserEmail.setTextColor(errorColor);
             return false;
         }
-        if (activeRequest()) {
+        /*if (activeRequest()) {
             Toast.makeText(this, Controller.getBigMessage("Compruebe el código de verificación en su correo"),Toast.LENGTH_LONG).show();
             unlockCodeView();
             return false;
@@ -214,34 +259,15 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean registeredMail() {
-        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getUserByEmail.php";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
-            try {
-                if(!response.isEmpty()) {
-                    user = Person.jsonToPerson((new JSONArray(response)).getJSONObject(0));
-                }
-            } catch (JSONException e) {
-                System.err.println(e);
-            }
-        }, error -> Log.d(this.getClass().getSimpleName(), "Error de conexión. Email.")) {
-            @Override
-            protected Map<String,String> getParams() {
-                Map<String,String> params = new HashMap<>();
-                params.put("CREDENCIAL", txtUserEmail.getText().toString());
-                return params;
-            }
-        };
-        queue.add(stringRequest);
-        return user != null;
-    }
-
-    private boolean registeredUser() {
+    private void registeredUser() {
         String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getUserByUsername.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             try {
                 if(!response.isEmpty()) {
-                    user = Person.jsonToPerson((new JSONArray(response)).getJSONObject(0));
+                    user = Person.jsonToPerson(new JSONObject(response));
+                    Toast.makeText(this, Controller.getBigMessage("Usuario encontrado"),Toast.LENGTH_LONG).show();
+                } else {
+                    registeredMail();
                 }
             } catch (JSONException e) {
                 System.err.println(e);
@@ -255,14 +281,39 @@ public class RecoverPasswordActivity extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
-        return user != null;
     }
 
-    private boolean activeRequest() {
+    private void registeredMail() {
+        String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getUserByEmail.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            try {
+                if(!response.isEmpty()) {
+                    user = Person.jsonToPerson(new JSONObject(response));
+                    Toast.makeText(this, Controller.getBigMessage("Correo encontrado"),Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, Controller.getBigMessage("Usuario no encontrado"),Toast.LENGTH_LONG).show();
+                }
+            } catch (JSONException e) {
+                System.err.println(e);
+            }
+        }, error -> Log.d(this.getClass().getSimpleName(), "Error de conexión. Email.")) {
+            @Override
+            protected Map<String,String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("CREDENCIAL", txtUserEmail.getText().toString());
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    private void activeRequest() {
         String url = "https://proyectosuta2.000webhostapp.com/eventos_uta/models/getRequestByPersonId.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             if(!response.isEmpty()) {
                 request = true;
+            } else {
+                request = false;
             }
         }, error -> Log.d(this.getClass().getSimpleName(), "Error de conexión. Solicitud.")) {
             @Override
@@ -273,7 +324,6 @@ public class RecoverPasswordActivity extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
-        return request;
     }
 
     private void unlockCodeView() {

@@ -225,6 +225,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#FFFFFF"
                 android:fontFamily="@font/poppins_medium"
+                android:onClick="returnToLogin"
                 android:text="CANCELAR"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"

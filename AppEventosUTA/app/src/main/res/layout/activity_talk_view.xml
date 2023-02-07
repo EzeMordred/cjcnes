@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -39,109 +38,129 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txtTitleW"
+                        android:id="@+id/txtEvento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txtWebinar"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:elegantTextHeight="true"
-                        android:fontFamily="@font/poppins"
-                        android:text="Webinarios internacionales especializados virtuales para docentes de las facultades de la Universidad Técnica de Ambato"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorDarkGrayUTA"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/imgUTA"
-                        android:layout_width="125dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@drawable/uta300" />
-
-                    <TextView
-                        android:id="@+id/txtWebinar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/imgUTA"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@color/colorDarkRedUTA"
                         android:elegantTextHeight="true"
-                        android:fontFamily="@font/poppins_medium"
                         android:padding="5dp"
-                        android:text=" WEBINAR   "
-                        android:textColor="@color/white"
-                        android:textSize="22sp" />
-
-                    <TextView
-                        android:id="@+id/txtDateTimeW"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtTitleW"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:drawableStart="@drawable/ic_calendar_red"
-                        android:elegantTextHeight="true"
-                        android:fontFamily="@font/poppins"
-                        android:text="25/10/2021\n15:00"
+                        android:text="CHARLA"
                         android:textAlignment="center"
-                        android:textColor="@color/colorLightRedUTA"
+                        android:textColor="@color/white"
                         android:textSize="20sp" />
 
+                    <ImageView
+                        android:id="@+id/imgFoto1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/txtEvento"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/ponente" />
+
                     <TextView
-                        android:id="@+id/transmissionTitle"
+                        android:id="@+id/txtFecha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txtDateTimeW"
+                        android:layout_below="@id/imgFoto1"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
+                        android:drawableStart="@drawable/ic_calendar_red"
                         android:elegantTextHeight="true"
-                        android:fontFamily="@font/poppins"
-                        android:text="Transmisión:"
+                        android:text="MARTES\n06 de diciembre\n11:00 a 13:00"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorLightRedUTA"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/txtUbicación"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtFecha"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:elegantTextHeight="true"
+                        android:text="Ubicación:"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorDarkRedUTA"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/imgTransmission"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/transmissionTitle"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@drawable/ic_home" />
-
                     <TextView
-                        android:id="@+id/txtTransmition2"
+                        android:id="@+id/txtUbicación2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/imgTransmission"
+                        android:layout_below="@id/txtUbicación"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="0dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:elegantTextHeight="true"
-                        android:fontFamily="@font/poppins"
-                        android:text="https://cedia.zoom.us/j/89539441967"
+                        android:text="Auditorio FISEI"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorDarkGrayUTA"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgFoto3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtUbicación2"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_home" />
+
+                    <TextView
+                        android:id="@+id/txtPresencial"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgFoto3"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:elegantTextHeight="true"
+                        android:text="Asistentes:"
                         android:textAlignment="textStart"
-                        android:textColor="@color/colorLightGrayUTA"
+                        android:textColor="@color/colorDarkRedUTA"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtTemática"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtPresencial"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:elegantTextHeight="true"
+                        android:text="- Estudiantes FISEI\n- Docentes FISEI\n- Graduados y agresados"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/colorDarkGrayUTA"
                         android:textSize="16sp"
-                        android:visibility="gone" />
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTemática"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_home" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -151,58 +170,55 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:id="@+id/imgSpeaker"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/imgUTA2"
+                        android:layout_width="125dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
-                        app:srcCompat="@drawable/ponente" />
+                        app:srcCompat="@drawable/uta300" />
 
                     <TextView
-                        android:id="@+id/txtSpeakerNameW"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/imgSpeaker"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@color/colorDarkRedUTA"
-                        android:elegantTextHeight="true"
-                        android:fontFamily="@font/poppins_medium"
-                        android:padding="5dp"
-                        android:text="Viktoria Bodnarova"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/txtSpeakerJobW"
+                        android:id="@+id/txtAgenda"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txtSpeakerNameW"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/imgUTA2"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@color/colorLightGrayUTA"
+                        android:elegantTextHeight="true"
+                        android:padding="5dp"
+                        android:paddingEnd="10dp"
+                        android:text="Maria Olivo - Back End Developer"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtInf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtAgenda"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:elegantTextHeight="true"
-                        android:fontFamily="@font/poppins"
-                        android:text="Coordinadora regional para Latinoamérica y el Caribe de UERAXESS"
-                        android:textAlignment="textEnd"
+                        android:text="EMPLEABILIDAD EN SITECORE"
+                        android:textAlignment="center"
                         android:textColor="@color/colorLightGrayUTA"
-                        android:textSize="16sp"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvOrganizer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txtSpeakerJobW"
+                        android:layout_below="@id/txtInf"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:nestedScrollingEnabled="false" />
